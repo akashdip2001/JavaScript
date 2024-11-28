@@ -14,4 +14,28 @@ function addTask() {
     listItem.appendChild(span); // Add the span element to the list item
   }
   inputBox.value = ""; // Clear the input box after adding the task
+  saveData(); // Save the data to local storage
 }
+
+// if click LI then add class checked & if click SPAN then remove the parent element
+listContainer.addEventListener("click", function(e) {
+  if(e.target.tagName === "LI") {
+    e.target.classList.toggle("checked");
+    saveData();
+  }
+  else if(e.target.tagName === "SPAN") {
+    e.target.parentElement.remove();
+    saveData();
+  }
+}, false);
+
+
+// create function --> save data to local storage
+function saveData() {
+  localStorage.setItem("data", listContainer.innerHTML);
+}
+// show all saved data from local storage when open the website again.
+function showData() {
+  listContainer.innerHTML = localStorage.getItem("data");
+}
+showData(); // Call the function to show the data when the website is opened
