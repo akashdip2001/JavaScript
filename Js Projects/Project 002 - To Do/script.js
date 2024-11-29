@@ -1,48 +1,39 @@
-// DOM Elements
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
-// Add Task Function
+// Add a new task
 function addTask() {
-  const taskText = inputBox.value.trim(); // Trim input to avoid empty spaces
-  if (taskText === "") {
+  if (inputBox.value === "") {
     alert("Please enter a task");
-    return;
+  } else {
+    let listItem = document.createElement("li");
+    listItem.innerHTML = inputBox.value;
+    listContainer.appendChild(listItem);
+
+    let span = document.createElement("span");
+    span.innerHTML = "X";
+    listItem.appendChild(span);
   }
-
-  // Create task list item
-  const listItem = document.createElement("li");
-  listItem.textContent = taskText;
-
-  // Create and append delete button (span)
-  const span = document.createElement("span");
-  span.textContent = "X";
-  listItem.appendChild(span);
-
-  // Add to the list
-  listContainer.appendChild(listItem);
-
-  // Clear input and save data
-  inputBox.value = "";
-  saveData();
+  inputBox.value = ""; // Clear input
+  saveData(); // Save to local storage
 }
 
-// Handle List Item Clicks
+// Handle clicks on tasks (toggle checked or delete)
 listContainer.addEventListener(
   "click",
   function (e) {
     if (e.target.tagName === "LI") {
-      e.target.classList.toggle("checked"); // Toggle completed state
+      e.target.classList.toggle("checked");
       saveData();
     } else if (e.target.tagName === "SPAN") {
-      e.target.parentElement.remove(); // Remove task
+      e.target.parentElement.remove();
       saveData();
     }
   },
   false
 );
 
-// Share Tasks Function
+// Share the tasks via a link
 function shareTasks() {
   const tasks = Array.from(listContainer.children).map((li) => ({
     text: li.textContent.replace("X", "").trim(),
@@ -52,7 +43,6 @@ function shareTasks() {
   const encodedTasks = encodeURIComponent(JSON.stringify(tasks));
   const shareUrl = `${window.location.origin}${window.location.pathname}?tasks=${encodedTasks}`;
 
-  // Display the shareable link
   const shareLink = document.getElementById("share-link");
   const shareUrlElement = document.getElementById("share-url");
   const copyButton = document.getElementById("copy-btn");
@@ -63,7 +53,7 @@ function shareTasks() {
   copyButton.style.display = "inline-block";
 }
 
-// Load Tasks from Query Parameter
+// Load tasks from query parameters and sync with existing tasks
 function loadTasksFromQuery() {
   const urlParams = new URLSearchParams(window.location.search);
   const tasksParam = urlParams.get("tasks");
@@ -71,8 +61,22 @@ function loadTasksFromQuery() {
   if (tasksParam) {
     try {
       const tasks = JSON.parse(decodeURIComponent(tasksParam));
-      listContainer.innerHTML = ""; // Clear existing tasks
+      const existingTasks = Array.from(listContainer.children);
 
+      // Add a divider if there are existing tasks
+      if (existingTasks.length > 0) {
+        const divider = document.createElement("li");
+        // divider.textContent = "---- Shared Tasks Below ----";
+        divider.classList.add("divider"); // Add a specific class for styling
+        divider.style.textAlign = "center";
+        divider.style.color = "gray";
+        divider.style.margin = "10px 0";
+        divider.style.pointerEvents = "none"; // Prevent clicks or interactions
+        divider.style.userSelect = "none"; // Prevent text selection
+        listContainer.appendChild(divider);
+      }
+
+      // Append shared tasks
       tasks.forEach((task) => {
         const listItem = document.createElement("li");
         listItem.textContent = task.text;
@@ -87,13 +91,18 @@ function loadTasksFromQuery() {
 
         listContainer.appendChild(listItem);
       });
+
+      // Save the combined list
+      saveData();
+      return true;
     } catch (error) {
       console.error("Failed to parse tasks from query parameter:", error);
     }
   }
+  return false; // No tasks loaded
 }
 
-// Copy Shareable Link to Clipboard
+// Copy the share link to the clipboard
 function copyToClipboard() {
   const shareUrlElement = document.getElementById("share-url");
   navigator.clipboard.writeText(shareUrlElement.href).then(() => {
@@ -101,11 +110,12 @@ function copyToClipboard() {
   });
 }
 
-// Save and Load Data with Local Storage
+// Save data to local storage
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
 }
 
+// Show saved data from local storage when the page loads
 function showData() {
   const savedData = localStorage.getItem("data");
   if (savedData) {
@@ -113,11 +123,23 @@ function showData() {
   }
 }
 
-// Initialize the App
-function initialize() {
-  showData(); // Load data from local storage
-  loadTasksFromQuery(); // Check for query parameters
+// Clear query parameters from the URL after loading tasks
+function clearQueryParameters() {
+  setTimeout(() => {
+    const url = new URL(window.location.href);
+    url.search = "";
+    window.history.replaceState(null, "", url.toString());
+  }, 2000); // Delay to ensure tasks are loaded first
 }
 
-// Run initialization on page load
+// Initialize the app
+function initialize() {
+  showData(); // Load tasks from local storage
+  const loadedFromQuery = loadTasksFromQuery(); // Load shared tasks
+  if (loadedFromQuery) {
+    clearQueryParameters(); // Clear the query parameters if tasks were loaded
+  }
+}
+
+// Call initialize on page load
 initialize();

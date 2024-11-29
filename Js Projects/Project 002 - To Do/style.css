@@ -125,3 +125,13 @@ ul li span:hover{
 #copy-btn:hover {
   background-color: #45a049;
 }
+
+ul li.divider::before {
+  content: none; /* Remove the checkbox */
+}
+ul li.divider {
+  padding: 0;
+  margin: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+}
