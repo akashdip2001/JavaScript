@@ -1,41 +1,123 @@
+// DOM Elements
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
+// Add Task Function
 function addTask() {
-  if(inputBox.value === "") { // If the input box is empty
+  const taskText = inputBox.value.trim(); // Trim input to avoid empty spaces
+  if (taskText === "") {
     alert("Please enter a task");
-  } else {
-    let listItem = document.createElement("li"); // store the text in listitem variable.
-    listItem.innerHTML = inputBox.value; // Add the text to the list item
-    listContainer.appendChild(listItem); // Add the listitem to the list-container (html)
-
-    let span = document.createElement("span"); // Create a span element
-    span.innerHTML = "X"; // Add the text to the span element
-    listItem.appendChild(span); // Add the span element to the list item
+    return;
   }
-  inputBox.value = ""; // Clear the input box after adding the task
-  saveData(); // Save the data to local storage
+
+  // Create task list item
+  const listItem = document.createElement("li");
+  listItem.textContent = taskText;
+
+  // Create and append delete button (span)
+  const span = document.createElement("span");
+  span.textContent = "X";
+  listItem.appendChild(span);
+
+  // Add to the list
+  listContainer.appendChild(listItem);
+
+  // Clear input and save data
+  inputBox.value = "";
+  saveData();
 }
 
-// if click LI then add class checked & if click SPAN then remove the parent element
-listContainer.addEventListener("click", function(e) {
-  if(e.target.tagName === "LI") {
-    e.target.classList.toggle("checked");
-    saveData();
-  }
-  else if(e.target.tagName === "SPAN") {
-    e.target.parentElement.remove();
-    saveData();
-  }
-}, false);
+// Handle List Item Clicks
+listContainer.addEventListener(
+  "click",
+  function (e) {
+    if (e.target.tagName === "LI") {
+      e.target.classList.toggle("checked"); // Toggle completed state
+      saveData();
+    } else if (e.target.tagName === "SPAN") {
+      e.target.parentElement.remove(); // Remove task
+      saveData();
+    }
+  },
+  false
+);
 
+// Share Tasks Function
+function shareTasks() {
+  const tasks = Array.from(listContainer.children).map((li) => ({
+    text: li.textContent.replace("X", "").trim(),
+    checked: li.classList.contains("checked"),
+  }));
 
-// create function --> save data to local storage
+  const encodedTasks = encodeURIComponent(JSON.stringify(tasks));
+  const shareUrl = `${window.location.origin}${window.location.pathname}?tasks=${encodedTasks}`;
+
+  // Display the shareable link
+  const shareLink = document.getElementById("share-link");
+  const shareUrlElement = document.getElementById("share-url");
+  const copyButton = document.getElementById("copy-btn");
+
+  shareUrlElement.href = shareUrl;
+  shareUrlElement.textContent = shareUrl;
+  shareLink.style.display = "block";
+  copyButton.style.display = "inline-block";
+}
+
+// Load Tasks from Query Parameter
+function loadTasksFromQuery() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tasksParam = urlParams.get("tasks");
+
+  if (tasksParam) {
+    try {
+      const tasks = JSON.parse(decodeURIComponent(tasksParam));
+      listContainer.innerHTML = ""; // Clear existing tasks
+
+      tasks.forEach((task) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = task.text;
+
+        if (task.checked) {
+          listItem.classList.add("checked");
+        }
+
+        const span = document.createElement("span");
+        span.textContent = "X";
+        listItem.appendChild(span);
+
+        listContainer.appendChild(listItem);
+      });
+    } catch (error) {
+      console.error("Failed to parse tasks from query parameter:", error);
+    }
+  }
+}
+
+// Copy Shareable Link to Clipboard
+function copyToClipboard() {
+  const shareUrlElement = document.getElementById("share-url");
+  navigator.clipboard.writeText(shareUrlElement.href).then(() => {
+    alert("Link copied to clipboard!");
+  });
+}
+
+// Save and Load Data with Local Storage
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
 }
-// show all saved data from local storage when open the website again.
+
 function showData() {
-  listContainer.innerHTML = localStorage.getItem("data");
+  const savedData = localStorage.getItem("data");
+  if (savedData) {
+    listContainer.innerHTML = savedData;
+  }
 }
-showData(); // Call the function to show the data when the website is opened
+
+// Initialize the App
+function initialize() {
+  showData(); // Load data from local storage
+  loadTasksFromQuery(); // Check for query parameters
+}
+
+// Run initialization on page load
+initialize();

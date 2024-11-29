@@ -99,3 +99,24 @@ ul li span:hover{
     background: #ffd9d9;
     color: #ed4343;
 }
+
+#share-link {
+  margin-top: 10px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+#copy-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#copy-btn:hover {
+  background-color: #45a049;
+}

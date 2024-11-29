@@ -14,6 +14,14 @@
           <input type="text" id="input-box" placeholder="What to Do ?" />
           <button id="add-btn" onclick="addTask()">Add</button>
         </div>
+        <button id="share-btn" onclick="shareTasks()">Share</button>
+        <p id="share-link" style="display: none">
+          Link: <a id="share-url" href="#" target="_blank"></a>
+        </p>
+        <button id="copy-btn" style="display: none" onclick="copyToClipboard()">
+          Copy Link
+        </button>
+
         <ul id="list-container">
           <!-- <li class="checked">Task 1</li>
           <li>Task 2</li>
