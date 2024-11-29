@@ -15,7 +15,7 @@
   max-width: 540px;
   background: #fff;
   margin: 100px auto 20px;
-  padding: 40px 30px 70px;
+  padding: 40px 30px 50px;
   border-radius: 10px;
 }
 .todo-app h2 {
@@ -100,6 +100,11 @@ ul li span:hover{
     color: #ed4343;
 }
 
+/* // Share Button CSS */
+.share-button-cintainer{
+      margin-top: 55px;
+    margin-left: 20px;
+}
 #share-link {
   margin-top: 10px;
   font-size: 14px;
