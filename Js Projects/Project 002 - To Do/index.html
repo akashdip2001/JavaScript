@@ -36,5 +36,19 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script>
+    // unlock the List
+   // Wait for 2 seconds after the page loads
+    setTimeout(function() {
+      // Get the current URL
+      let url = new URL(window.location.href);
+
+      // Remove all query parameters
+      url.search = "";
+
+      // Update the URL in the browser without reloading the page
+      window.history.replaceState(null, "", url.toString());
+    }, 2000); // 2000ms = 2 seconds
+  </script>
   </body>
 </html>
