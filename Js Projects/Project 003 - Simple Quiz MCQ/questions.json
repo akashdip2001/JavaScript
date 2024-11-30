@@ -1,0 +1,137 @@
+[
+  {
+    "question": "What is the full form of HTML?",
+    "answers": [
+      { "text": "Hyper Text Markup Language", "correct": true },
+      { "text": "Hyperlinks and Text Markup Language", "correct": false },
+      { "text": "Home Tool Markup Language", "correct": false },
+      { "text": "Hyper Tool Markup Language", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of CSS?",
+    "answers": [
+      { "text": "Colorful Style Sheets", "correct": false },
+      { "text": "Creative Style Sheets", "correct": false },
+      { "text": "Cascading Style Sheets", "correct": true },
+      { "text": "Computer Style Sheets", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of HTTP?",
+    "answers": [
+      { "text": "Hyper Text Transfer Protocol", "correct": true },
+      { "text": "Hyper Text Transfer Product", "correct": false },
+      { "text": "Hyper Tool Transfer Protocol", "correct": false },
+      { "text": "Hyper Tool Transfer Product", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of JS?",
+    "answers": [
+      { "text": "JavaScript", "correct": true },
+      { "text": "JavaSuper", "correct": false },
+      { "text": "JustScript", "correct": false },
+      { "text": "JordenShoes", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of XML?",
+    "answers": [
+      { "text": "eXecutable Markup Language", "correct": false },
+      { "text": "eXtra-ordinary Markup Language", "correct": false },
+      { "text": "eXtensible Markup Language", "correct": true },
+      { "text": "eXamine Markup Language", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of SQL?",
+    "answers": [
+      { "text": "Structured Query Language", "correct": true },
+      { "text": "Strong Question Language", "correct": false },
+      { "text": "Structured Question Language", "correct": false },
+      { "text": "Strong Query Language", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of PHP?",
+    "answers": [
+      { "text": "Hypertext Preprocessor", "correct": true },
+      { "text": "Hypertext Processor", "correct": false },
+      { "text": "Hypertext Programming", "correct": false },
+      { "text": "Hypertext Preprogramming", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of IP?",
+    "answers": [
+      { "text": "Internet Protocol", "correct": true },
+      { "text": "Internet Port", "correct": false },
+      { "text": "Internet Process", "correct": false },
+      { "text": "Internet Preprocessor", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of OS?",
+    "answers": [
+      { "text": "Operating System", "correct": true },
+      { "text": "Optical Sensor", "correct": false },
+      { "text": "Order of Significance", "correct": false },
+      { "text": "Open Source", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of LAN?",
+    "answers": [
+      { "text": "Local Area Node", "correct": false },
+      { "text": "Local Area Net", "correct": false },
+      { "text": "Local Area Number", "correct": false },
+      { "text": "Local Area Network", "correct": true }
+    ]
+  },
+  {
+    "question": "What is the full form of WAN?",
+    "answers": [
+      { "text": "Wide Area Number", "correct": false },
+      { "text": "Wide Area Network", "correct": true },
+      { "text": "Wide Area Node", "correct": false },
+      { "text": "Wide Area Net", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of URL?",
+    "answers": [
+      { "text": "Uniform Reference Locator", "correct": false },
+      { "text": "Uniform Resource Locator", "correct": true },
+      { "text": "Universal Resource Locator", "correct": false },
+      { "text": "Universal Reference Locator", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of API?",
+    "answers": [
+      { "text": "Application Programming Interface", "correct": true },
+      { "text": "Advanced Programming Interface", "correct": false },
+      { "text": "Automated Programming Interface", "correct": false },
+      { "text": "Application Processing Interface", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of IDE?",
+    "answers": [
+      { "text": "Integrated Design Environment", "correct": false },
+      { "text": "Integrated Development Environment", "correct": true },
+      { "text": "Integrated Debugging Environment", "correct": false },
+      { "text": "Interface Development Environment", "correct": false }
+    ]
+  },
+  {
+    "question": "What is the full form of DNS?",
+    "answers": [
+      { "text": "Digital Name Server", "correct": false },
+      { "text": "Domain Name System", "correct": true },
+      { "text": "Domain Network Server", "correct": false },
+      { "text": "Data Network System", "correct": false }
+    ]
+  }
+]

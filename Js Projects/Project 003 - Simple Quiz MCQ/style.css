@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+
+}
+body {
+    background: #00183f;
+    ;
+}
+.app {
+    background: #fff;
+    max-width: 50%;
+    max-height: 600px;
+    margin: 100px auto 0;
+    border-radius: 30px;
+    padding: 30px;
+}
+.app h1 {
+    font-weight: 25px;
+    /* text-align: center; */
+    color: #00183f;
+    border-bottom: 1px solid #00183f;
+    margin-bottom: 30px;
+}
+.quiz {
+    padding: 20px 0;
+}
+.quiz h2 {
+    font-size: 20px;
+    color: #00183f;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.button {
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border: 1px solid #00183f;
+    transition: all 0.3s ease;
+}
+.button:hover {
+    background: #222;
+    color: #fff;
+}
+#next-btn {
+    background: #00183f;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 40%;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px auto 0;
+    text-align: center;
+    border: 1px solid #00183f;
+    transition: all 0.3s ease;
+    display: none; /* block - to Display center, But none -> control by js*/
+}
+
