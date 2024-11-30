@@ -14,13 +14,41 @@
           <input type="text" id="input-box" placeholder="What to Do ?" />
           <button id="add-btn" onclick="addTask()">Add</button>
         </div>
+
         <ul id="list-container">
           <!-- <li class="checked">Task 1</li>
           <li>Task 2</li>
           <li>Task 3</li> -->
         </ul>
+        <div class="share-button-cintainer">
+          <button style="padding: 10px 50px;" id="share-btn" onclick="shareTasks()">Share</button>
+          <p id="share-link" style="display: none">
+            Link: <a id="share-url" href="#" target="_blank"></a>
+          </p>
+          <button
+            id="copy-btn"
+            style="display: none"
+            onclick="copyToClipboard()"
+          >
+            Copy Link
+          </button>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
+    <script>
+    // clearing the query parameters after sharing the link!
+   // Wait for 2 seconds after the page loads
+    setTimeout(function() {
+      // Get the current URL
+      let url = new URL(window.location.href);
+
+      // Remove all query parameters
+      url.search = "";
+
+      // Update the URL in the browser without reloading the page
+      window.history.replaceState(null, "", url.toString());
+    }, 2000); // 2000ms = 2 seconds
+  </script>
   </body>
 </html>
