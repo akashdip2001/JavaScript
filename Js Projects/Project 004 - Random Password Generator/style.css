@@ -72,7 +72,11 @@ body{
     margin-top: 5px;
     padding: 2px;
 }
-.container button{
+.container .btn{
+    display: flex;
+    gap: 10px;
+}
+.container .btn button{
     background: #09773e;
     color: #ededed;
     border: 0;
@@ -87,9 +91,13 @@ body{
     justify-content: center;
     transition: background 0.3s;
 }
-.container button:hover{
+.container .btn button:hover{
     background: #0a5f33;
 }
-.container button:active{
+.container .btn button:active{
     transform: scale(0.9);
+}
+.container .btn .btn-red:hover{
+    background: #eaed36;
+    color: rgb(5, 122, 83);
 }
