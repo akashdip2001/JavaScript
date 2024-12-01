@@ -86,6 +86,7 @@ function selectAnswer(e) {
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   if (currentQuestionIndex < shuffledQuestions.length) {
+    // shuffledQuestions.length --> how to get 4 questions , check the README file
     showQuestion();
   } else {
     showScore();
@@ -94,7 +95,7 @@ nextButton.addEventListener("click", () => {
 
 // Show final score
 function showScore() {
-  resetState();
+  resetState(); // Remove previous question and answers
   questionElement.innerText = `You scored ${score} out of ${shuffledQuestions.length}!`;
   nextButton.innerText = "Restart";
   nextButton.style.display = "block";
