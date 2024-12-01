@@ -46,9 +46,12 @@ body {
     border: 1px solid #00183f;
     transition: all 0.3s ease;
 }
-.button:hover {
+.button:hover:not([disabled]) {
     background: #222;
     color: #fff;
+}
+.button:disabled {
+    cursor: not-allowed;
 }
 #next-btn {
     background: #00183f;
@@ -65,3 +68,11 @@ body {
     display: none; /* block - to Display center, But none -> control by js*/
 }
 
+.correct {
+    background: #28a745;
+    color: #fff;
+}
+.incorrect {
+    background: #dc3545;
+    color: #fff;
+}

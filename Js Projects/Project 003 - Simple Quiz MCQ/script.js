@@ -28,14 +28,15 @@ function startQuiz() {
 
 // Show current question
 function showQuestion() {
-  resetState();
-  const currentQuestion = shuffledQuestions[currentQuestionIndex];
-  questionElement.innerText = currentQuestion.question;
+  resetState(); // Remove previous question and answers
+  let currentQuestion = shuffledQuestions[currentQuestionIndex];
+  let questioNo = currentQuestionIndex + 1;
+  questionElement.innerText = questioNo + ". " + currentQuestion.question;
 
   currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
-    button.classList.add("button");
+    button.classList.add("button"); //class name
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
@@ -53,32 +54,32 @@ function resetState() {
 }
 
 // Handle answer selection
+// (e) --> get the data from the event (which button was clicked by user)
 function selectAnswer(e) {
-  const selectedButton = e.target;
-  const correct = selectedButton.dataset.correct === "true";
+  const selectedButton = e.target; // The clicked button
+  const isCorrect = selectedButton.dataset.correct === "true"; // Check if the answer is correct
 
-  // Update score if correct
-  if (correct) {
-    score++;
+  // Add the appropriate class based on correctness
+  if (isCorrect) {
+    selectedButton.classList.add("correct");
+    score++; // Increment score if correct
+  } else {
+    selectedButton.classList.add("incorrect");
   }
 
-  // Lock buttons and show feedback
+  // Check all buttons using array which is correct & Lock buttons and show feedback
   Array.from(answerButtonsElement.children).forEach((button) => {
-    setStatusClass(button, button.dataset.correct === "true");
+    // Check all buttons using array which is correct
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
     button.disabled = true; // Disable all buttons after one is clicked
   });
 
+  // also Block the btn - hover effect in css --> after clicking the button --> :not([disabled]) & cursor: not-allowed
+
   // Show the next button
   nextButton.style.display = "block";
-}
-
-// Set button status (correct or incorrect)
-function setStatusClass(element, correct) {
-  if (correct) {
-    element.classList.add("correct");
-  } else {
-    element.classList.add("incorrect");
-  }
 }
 
 // Handle Next button click
